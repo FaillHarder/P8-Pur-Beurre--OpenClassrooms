@@ -128,8 +128,11 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+<<<<<<< HEAD
 # vscode
 .vscode
 
+=======
+>>>>>>> b448f716135da5701227837051a1276e089b1f13
 # Node module
 node_modules
