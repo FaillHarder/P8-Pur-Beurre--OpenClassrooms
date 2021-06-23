@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webapp',
+    'usermanager',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'webapp/templates')
+            os.path.join(BASE_DIR, 'webapp/templates'),
+            os.path.join(BASE_DIR, 'usermanager/templates')
             ],
         'APP_DIRS': True,
         'OPTIONS': {
