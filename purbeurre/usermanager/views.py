@@ -1,26 +1,30 @@
-from usermanager.forms import UserRegistrationForm
+from usermanager.forms import SignUpForm
 
+from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, render
-from django.contrib.auth.models import User
 
 # Create your views here.
 def registrer(request):
     
-    if request.method == "POST":
-        User.objects.create_user(
-            username=request.POST.get("username"),
-            password=request.POST.get("password"),
-            email=request.POST.get("email"),
-            first_name=request.POST.get("first_name"),
-            last_name=request.POST.get("last_name")
-        )
-
-        return redirect("index")
-
-    context = {"form": UserRegistrationForm()}
-
-    return render(request, 'registrer.html', context)
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
+    else:
+        form = SignUpForm()
+    return render(request, 'registrer.html', {'form': form})
 
 
-def login(request):
-    pass
+def myprofile(request):
+
+    return render(request, 'myprofile.html')
+
+
+def myfood(request):
+
+    return render(request, 'myfood.html')
