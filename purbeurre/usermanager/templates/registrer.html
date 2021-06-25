@@ -3,10 +3,47 @@
 {% block header %}
     <!-- Masthead-->
     <header class="masthead">
-        <div class="container">
-            <form action="" method="POST">
+        <div class="container px-4 px-lg-5 h-100">
+            <div class="row gx-4 gx-lg-5 align-items-center justify-content-center text-center">
+                <div class="col-lg-8 align-self-start">
+                    <h2 class="text-primary">Créer un compte</h2>
+                </div>
+            </div>
+            <form method="post">
                 {% csrf_token %}
+                {% for field in form %}
+                
+                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center">
+                    <div class="col col-lg-6">
+                        <h5 class="text-primary">{{ field.label_tag }}</h5>
+                        <!-- {{ field }}<br> -->
+                        <input class="form-control" type="text" name="{{ field.label }}">
+                        
+                        {% if field.help_text %}
+                        <small class="text-white">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>   
+                    {% endfor %}
+                <div class="row gx-4 gx-lg-5 align-items-center justify-content-center text-center">
+                    <div class="col-lg-8 align-self-start">
+                        <button class="btn btn-primary" type="submit">Valider</button>
+                    </div>
+                </div>
+                
+                    
+                </div>
+            </form>
 
+
+
+
+            <!-- <form action="" method="POST">
+                {% csrf_token %}
+                
                 <div class="form-group col-lg-6">
                     {{ form.username.label_tag }}
                     <input class="form-control" type="text" name="username" placeholder="Votre identifiant">
@@ -32,7 +69,7 @@
                     <input class="form-control" type="text" name="last_name" placeholder="Votre Nom">
                 </div>
                 <button class="btn btn-primary" type="submit">S'enregistrer</button>
-            </form>
+            </form> -->
         </div>
     </header>
 {% endblock header %}

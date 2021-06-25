@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block header %}
+<header class="masthead">
+    <div class="container px-4 px-lg-5 h-50">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-8 align-self-center">
+                <h1>Au revoir</h1>
+                <div class="row">
+                    <a class="text-primary" href="{% url 'login'%}"><h4>Se reconnecter</h4></a>
+                </div>
+                <div class="row">
+                    <a class="text-primary" href="{% url 'index'%}"><h4>Retourner à l'accueil</h4></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
