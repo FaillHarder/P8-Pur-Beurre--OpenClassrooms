@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.forms.widgets import PasswordInput
+
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=50, label='Prénom')
@@ -13,9 +13,10 @@ class SignUpForm(UserCreationForm):
     )
     username = forms.CharField(
         max_length=50,
-        label='Identifiant',
+        label='Nom d\'utilisateur',
         help_text='50 caractères maximum. Lettres, chiffres est @/./+/-/_ seulement',
-    )    
+    )
+
 
     class Meta:
         model = User
