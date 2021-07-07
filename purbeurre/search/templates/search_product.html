@@ -6,13 +6,17 @@
         <div class="container px-4 px-lg-5 h-100">
             <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
                 <div class="col-lg-8 align-self-end">
+                    
+                    {% for product in products %}
+                        <h3>{{ product.product_name }}</h3>
+                        <img src="{{ product.image }}" alt="image_product" style="width: 200px;">
+                    {% endfor %}
+                    
                     <h1 class="text-white font-weight-bold">Du gras, oui, mais de qualité!</h1>
                     <hr class="divider" />
-                    <h2>Trouvez un produit de substitution pour ceux que vous consommez tous les jours.</h2>
+                    
                 </div>
-                <div class="col-lg-8 align-self-baseline">
-                    <input type="search" class="form-control" placeholder="Rechercher..." aria-label="Search">
-                </div>
+                
             </div>
         </div>
     </header>

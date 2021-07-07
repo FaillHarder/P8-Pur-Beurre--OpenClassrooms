@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webapp',
+    'search',
     'usermanager',
 ]
 
@@ -59,7 +59,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'webapp/templates'),
+            os.path.join(BASE_DIR, 'search/templates'),
             os.path.join(BASE_DIR, 'usermanager/templates')
             ],
         'APP_DIRS': True,
