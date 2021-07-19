@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'search',
     'usermanager',
+    'favorite',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +61,8 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'search/templates'),
-            os.path.join(BASE_DIR, 'usermanager/templates')
+            os.path.join(BASE_DIR, 'usermanager/templates'),
+            os.path.join(BASE_DIR, 'favorite/templates'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {

@@ -19,5 +19,6 @@ def get_categories(number):
             if len(liste_of_categories) == number:
                 return liste_of_categories
 
-list_cate = get_categories(100)
+list_cate = get_categories(400)
 print(list_cate)
+print(len(list_cate))

@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('search.urls')),
     path('', include('usermanager.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('', include('favorite.urls')),
 ]

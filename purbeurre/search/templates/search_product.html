@@ -4,20 +4,27 @@
     <!-- Masthead-->
     <header class="masthead">
         <div class="container px-4 px-lg-5 h-100">
-            <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-                <div class="col-lg-8 align-self-end">
-                    
+            <div class="container">
+                <h1 class="text-primary text-center">Sélectionnez votre produit</h1>
+                <div class="row mt-3">
                     {% for product in products %}
-                        <h3>{{ product.product_name }}</h3>
-                        <img src="{{ product.image }}" alt="image_product" style="width: 200px;">
+                    <div class="col-lg-4 mb-4">
+                        <div class="card prod_card">
+                            <div class="position-relative">
+                                <img class="img_nutriscore" src="static/dist/assets/img/nutriscore/nutriscore-{{product.nutriscore}}.png" alt="nutriscore">
+                            </div>
+                            <img src="{{ product.image }}" class="card-img-top img_product" alt="image du produit">
+                            <div class="btn">
+                                <a href="/substitute?query={{ product.bar_code }}" class="btn btn-primary">Selectionner</a>
+                            </div>
+                        </div>
+                    </div>
                     {% endfor %}
-                    
-                    <h1 class="text-white font-weight-bold">Du gras, oui, mais de qualité!</h1>
-                    <hr class="divider" />
-                    
                 </div>
-                
-            </div>
+            </div> 
         </div>
     </header>
 {% endblock header %}
+
+{% block content %}
+{% endblock content %}

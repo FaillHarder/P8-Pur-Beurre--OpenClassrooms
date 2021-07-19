@@ -42,13 +42,16 @@ class Command(BaseCommand):
                 try:
                     data_product = Product(data["product_name"], *list(data.values())[1:])
                     data_product.save()
+                    cate = Category.objects.get(name=category)
+                    Product.objects.get(bar_code=data["bar_code"]).categories.add(cate)
                 except IntegrityError:
                     continue
                 # ajoute la relation manytomany entre produit et category
-                Category.objects.get(name=category).product.add(data_product)
+                
 
         self.write_json_file_next_page("search/management/settings.json", params)
-    
+
+
     def read_json_file(self, json_file):
         with open(json_file, "r", encoding="utf-8") as file:
             data = json.load(file)
@@ -70,7 +73,7 @@ class Command(BaseCommand):
                 "tag_1": "A",
                 "json": "true",
                 "fields": ",".join(fields),
-                "page_size": 10,
+                "page_size": 100,
                 "page": page
             }
         )

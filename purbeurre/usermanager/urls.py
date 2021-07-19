@@ -5,5 +5,4 @@ urlpatterns = [
     path('registrer', views.registrer, name='registrer'),
     path('accounts/login', views.login, name='login'),
     path('myprofile', views.myprofile, name='myprofile'),
-    path('myfood', views.myfood, name='myfood'),
 ]
