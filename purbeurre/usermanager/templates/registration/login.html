@@ -10,34 +10,30 @@
                 <h4 class="text-white">Votre nom d'utilisateur ou votre mot de passe est incorrect. Veuillez réessayer</h4>
                 {% endif %}
 
-                {% if next %}
+                <!-- {% if next %}
                 {% if user.is_authenticated %}
                     <h4>Your account doesn't have access to this page. To proceed,
                     please login with an account that has access.</h4>
                 {% else %}
                     <h4>Please login to see this page.</h4>
                 {% endif %}
-                {% endif %}
+                {% endif %} -->
             </div>
         </div>
         <div class="row gx-4 gx-lg-5 align-items-center justify-content-center">
             
                 <form method="post" action="{% url 'login' %}">
                     {% csrf_token %}
-                    <!-- {{ form.username.label_tag }} -->
-                    <!-- {{ form.username }} -->
                     
                     <label for="fromlogin" class="form-label"><h4>Identifiant</h4></label>
                     <input type="text" autocomplete="off" name="username" class="form-control" placeholder="Identifiant">
                     
-                    <!-- {{ form.password.label_tag }} -->
-                    <!-- {{ form.password }} -->
                     <label for="fromlogin" class="form-label"><h4>Password</h4></label>
                     <input type="password" name="password" class="form-control" placeholder="Mot de passe">
                     
-
-                    <!-- <input type="submit" value="login" /> -->
-                    <!-- <input type="hidden" name="next" value="{{ next }}" /> -->
+                    {% if request.GET.next %}
+                        <input type="hidden" name="next" value="{{ request.GET.next }}">
+                    {% endif %}
                     <button type="submit" value="login" class="btn btn-primary">Valider</button>         
                 </form>
                 <h4><a href="{% url 'registrer' %}">Pas encore inscrit?</a></h4>

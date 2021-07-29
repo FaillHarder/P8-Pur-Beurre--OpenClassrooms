@@ -11,7 +11,10 @@
                     <h2>Trouvez un produit de substitution pour ceux que vous consommez tous les jours.</h2>
                 </div>
                 <div class="col-lg-8 align-self-baseline">
-                    <input type="search" class="form-control" placeholder="Rechercher..." aria-label="Search">
+                    <form class="input-group mb-3" method="GET" action="search_product">
+                        <input type="text" name="query" class="form-control" placeholder="Rechercher..." aria-label="Search">
+                        <button class="btn btn-primary" type="submit">Chercher</button>
+                    </form>
                 </div>
             </div>
         </div>

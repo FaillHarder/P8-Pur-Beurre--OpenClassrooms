@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from logging import DEBUG
 import os
 from pathlib import Path
 
@@ -23,8 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('PUR_BEURRE_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -38,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webapp',
+    'search',
     'usermanager',
+    'favorite',
 ]
 
 MIDDLEWARE = [
@@ -59,8 +59,9 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'webapp/templates'),
-            os.path.join(BASE_DIR, 'usermanager/templates')
+            os.path.join(BASE_DIR, 'search/templates'),
+            os.path.join(BASE_DIR, 'usermanager/templates'),
+            os.path.join(BASE_DIR, 'favorite/templates'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -139,3 +140,8 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
+
+if os.environ.get('ENV') == 'PRODUCTION':
+    DEBUG = False
+else:
+    DEBUG = True
