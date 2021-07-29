@@ -6,7 +6,7 @@ from django.test import RequestFactory, TestCase
 # Create your tests here.
 class TestView(TestCase):
 
-    def setUp(self) -> None:
+    def setUp(self):
         self.factory = RequestFactory()
         self.user = User.objects.create_user(username="test", password="test")
         return super().setUp()
@@ -28,6 +28,9 @@ class TestView(TestCase):
         }
         view = registrer(request)
         self.assertEqual(view.status_code, 302)
+
+        user = User.objects.all()
+        self.assertEqual(len(user), 2)
 
 
         
