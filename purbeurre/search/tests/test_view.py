@@ -1,21 +1,15 @@
-from search.models import Product, Category
-from favorite.views import product_save, myfood, description
+from search.views import index, search_product, substitute, mentions
 
-from django.contrib.auth.models import AnonymousUser, User
+from django.test.client import RequestFactory
+from search.models import Product, Category
+
 from django.test import RequestFactory, TestCase
 
 # Create your tests here.
-class ViewTest(TestCase):
+class TestView(TestCase):
 
     def setUp(self):
         self.factory = RequestFactory()
-        self.user = User.objects.create_user(
-            username="usernametest",
-            first_name="firstnametest",
-            last_name="lastnametest",
-            email="email@test.fr",
-            password="passwordtest"
-        )
         self.category = Category.objects.create(name="Snacks sucrés")
         self.product = Product.objects.create(
             product_name="nutella",
@@ -33,29 +27,35 @@ class ViewTest(TestCase):
             url="https://fr.openfoodfacts.org/produit/3017620425035/nutella-ferrero"
         )
         self.product.categories.add(self.category)
-
         return super().setUp()
 
-    def test_product_save(self):
-        request = self.factory.get(
-            'product_save',
-            {"substitute": "3017620425035"}
-        )
-        request.user = self.user
-        view = product_save(request)
+    def test_index(self):
+        request = self.factory.get("")
+        view = index(request)
         self.assertEqual(view.status_code, 200)
 
-    def test_myfood(self):
-        request = self.factory.get("myfood")
-        request.user = self.user
-        view = myfood(request)
+    def test_mentions(self):
+        request = self.factory.get("/mentions")
+        view = mentions(request)
+        self.assertEqual(view.status_code, 200)
+        
+
+    def test_search_product(self):
+        request = self.factory.get("/search_product")
+        request.GET = {"query": ""}
+        view = search_product(request)
+        self.assertEqual(view.status_code, 302)
+        
+        request.GET = {"query": "nutella"}
+        view = search_product(request)
+        self.assertEqual(view.status_code, 200)
+        
+        request.GET = {"query": "pain"}
+        view = search_product(request)
         self.assertEqual(view.status_code, 200)
 
-    def test_description(self):
-        request = self.factory.get(
-            "description",
-            {"query": "3017620425035"}
-        )
-        request.user = self.user
-        view = description(request)
+
+    def test_substitute(self):
+        request = self.factory.get("/substitute", {"query": "3017620425035"})
+        view = substitute(request)
         self.assertEqual(view.status_code, 200)

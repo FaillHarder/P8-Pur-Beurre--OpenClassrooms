@@ -8,6 +8,10 @@ def index(request):
 
     return render(request, "index.html")
 
+def mentions(request):
+
+    return render(request, "mentions.html")
+
 
 def search_product(request):
     
@@ -15,12 +19,9 @@ def search_product(request):
         query = request.GET.get("query")
         if query != "":
             products_list = Product().search(query)
-            if not products_list:
-                return(redirect("index")) #créer une page aucun résultat
-            else:
-                context = {
-                    "products": products_list
-                }
+            context = {
+                "products": products_list
+            }
             return render(request, "search_product.html", context)
         else:
             return(redirect("index"))
@@ -39,3 +40,4 @@ def substitute(request):
             "substitutes": substitutes
         }
         return render(request, "substitute.html", context)
+
