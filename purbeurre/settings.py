@@ -145,13 +145,13 @@ if os.environ.get('ENV') == 'PRODUCTION':
     DEBUG = False
     ALLOWED_HOSTS = ["pur-beurre-fdlc.herokuapp.com"]
     PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-    STATICFILES_DIRS = (
-        os.path.join(PROJECT_ROOT, 'static'),
-    )
-    STATICFILES_STORAGE = (
-        'whitenoise.storage.CompressedManifestStaticFilesStorage'
-    )
+    # STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+    # STATICFILES_DIRS = (
+    #     os.path.join(PROJECT_ROOT, 'static'),
+    # )
+    # STATICFILES_STORAGE = (
+    #     'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    # )
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
 else:
