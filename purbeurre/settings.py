@@ -144,10 +144,12 @@ LOGIN_REDIRECT_URL = '/'
 if os.environ.get('ENV') == 'PRODUCTION':
     DEBUG = False
     ALLOWED_HOSTS = ["pur-beurre-fdlc.herokuapp.com"]
+
+    # static files
     PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
     STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
     STATICFILES_DIRS = (
-        os.path.join(PROJECT_ROOT, 'static'),
+        os.path.join(PROJECT_ROOT, 'purbeurre/static'),
     )
     STATICFILES_STORAGE = (
         'whitenoise.storage.CompressedManifestStaticFilesStorage'
