@@ -150,7 +150,7 @@ if os.environ.get('ENV') == 'PRODUCTION':
     STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 <<<<<<< HEAD
     STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static/dist'),
+        os.path.join(PROJECT_ROOT, 'static/dist'),
     )
 =======
 >>>>>>> 42acafdd8981c756964073026bd0702fcce8610e
