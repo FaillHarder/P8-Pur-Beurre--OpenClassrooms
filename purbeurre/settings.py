@@ -130,9 +130,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static')
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -144,16 +144,20 @@ LOGIN_REDIRECT_URL = '/'
 if os.environ.get('ENV') == 'PRODUCTION':
     DEBUG = False
     ALLOWED_HOSTS = ["pur-beurre-fdlc.herokuapp.com"]
+
+    # static files
     PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
     STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-    STATICFILES_DIRS = (
-        os.path.join(PROJECT_ROOT, 'static'),
-    )
     STATICFILES_STORAGE = (
         'whitenoise.storage.CompressedManifestStaticFilesStorage'
     )
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static/dist'),
+    )
+
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
 else:
     DEBUG = True
     ALLOWED_HOSTS = []
+
