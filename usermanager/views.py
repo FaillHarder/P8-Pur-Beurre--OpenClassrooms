@@ -17,7 +17,7 @@ def registrer(request):
             if "next" is request.POST:
                 return redirect(request.POST.get('next'))
             else:
-                return redirect('accounts/login/')
+                return redirect('index')
     else:
         form = SignUpForm()
     return render(request, 'registrer.html', {'form': form})
