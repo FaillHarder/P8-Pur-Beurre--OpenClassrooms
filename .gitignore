@@ -130,12 +130,3 @@ dmypy.json
 
 # vscode
 .vscode
-
-# Node module
-node_modules/
-scripts/
-src/
-.editorconfig
-LICENSE
-package.json
-package-lock.json
