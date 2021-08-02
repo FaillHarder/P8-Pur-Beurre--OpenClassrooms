@@ -27,7 +27,7 @@ class TestView(TestCase):
             "password2": "passwordtest"
         }
         view = registrer(request)
-        self.assertEqual(view.status_code, 302)
+        self.assertEqual(view.status_code, 200)
 
         user = User.objects.all()
         self.assertEqual(len(user), 2)

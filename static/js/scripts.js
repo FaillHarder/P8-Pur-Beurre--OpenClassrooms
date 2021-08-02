@@ -23,6 +23,7 @@ window.addEventListener('DOMContentLoaded', event => {
 
     };
 
+
     // Shrink the navbar 
     navbarShrink();
 
@@ -38,6 +39,8 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     };
 
+
+
     // Collapse responsive navbar when toggler is visible
     const navbarToggler = document.body.querySelector('.navbar-toggler');
     const responsiveNavItems = [].slice.call(
@@ -51,9 +54,5 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     });
 
-    // Activate SimpleLightbox plugin for portfolio items
-    new SimpleLightbox({
-        elements: '#portfolio a.portfolio-box'
-    });
 
 });
