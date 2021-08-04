@@ -34,7 +34,7 @@
                     {% if request.GET.next %}
                         <input type="hidden" name="next" value="{{ request.GET.next }}">
                     {% endif %}
-                    <button type="submit" value="{{ request.GET.index }}" class="btn btn-primary">Valider</button>         
+                    <button type="submit" value="{{ request.GET.index }}" class="btn btn-primary" name="validate">Valider</button>         
                 </form>
                 <h4><a href="{% url 'registrer' %}">Pas encore inscrit?</a></h4>
         </div>

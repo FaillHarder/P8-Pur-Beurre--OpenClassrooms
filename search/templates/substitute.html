@@ -3,19 +3,17 @@
 {% block header %}
     <!-- Masthead-->
     <header class="product">
-        <div class="section">
-            <div class="container-fluid bg-dark">
-                <div class="container-fluid bg_img_product" style="background-image: url({{product.image}});">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-auto text-center">
-                            <h3 class="mt-5 text-white bg-dark">[ {{ product.product_name }} ]</h3>
-                        </div>
+        <div class="container-fluid bg-dark">
+            <div class="container-fluid bg_img_product" style="background-image: url({{product.image}});">
+                <div class="row justify-content-center">
+                    <div class="col-lg-auto text-center">
+                        <h3 class="mt-5 text-white bg-dark">[ {{ product.product_name }} ]</h3>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="container-fluid justify-content-center mb-5">
+        
+        <div class="container-fluid justify-content-center">
             <div class="row justify-content-around">
                 <div class="col-lg-4">
                     <div class="text-center">
@@ -23,6 +21,7 @@
                         <img src="static/assets/img/nutriscore/nutri-score-{{product.nutriscore}}.png" alt="nutriscore">
                     </div>
                 </div>
+
                 <div class="col-lg-4">
                     <div class="row justify-content-center">
                         <h3 class="text-center text-primary">Repères nutritionnels pour 100 grammes</h3>
@@ -45,24 +44,18 @@
                     </div>
                 </div>
             </div>
+
             <div class="row mt-2">
                 <div class="col text-center">
                     <a href="{{ product.url }}" class="btn btn-primary">Voir la fiche d'OpenFoodFacts</a>
                 </div>
             </div>
         </div>
-
         
-
-        
-
-        
-
         <div class="container px-4 px-lg-5">
             <div class="container">
                 <h2 class="text-primary text-center mb-5">Vous pouvez remplacer cet aliment par :</h2>
                 <div class="row mt-2">
-                    {% if user.is_authenticated %}
                     {% for substitute in substitutes %}
                     <div class="col-lg-4 mb-5">
                         <div class="card prod_card m-auto">
@@ -70,29 +63,20 @@
                                 <img class="img_nutriscore" src="static/assets/img/nutriscore/nutriscore-{{substitute.nutriscore}}.png" alt="nutriscore">
                             </div>
                             <img src="{{ substitute.image }}" class="card-img-top img_product" alt="image du produit">
-                            <div class="btn">                            
+                            <div class="text-center mt-auto" style="height: 2.5rem;">{{ substitute.product_name }}</div>
+                            {% if user.is_authenticated %}
+                            <div class="btn">
+                                <img src="static/assets/img/diskette.png" alt="diskette" style="height: 2.5rem;">
                                 <a href="/product_save?substitute={{ substitute.bar_code }}" class="btn btn-primary align-items-center">Sauvegarder</a>
                             </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                    {% else %}
-                    {% for substitute in substitutes %}
-                    <div class="col-lg-4 mb-4">
-                        <div class="card prod_card">
-                            <div class="position-relative">
-                                <img class="img_nutriscore" src="static/assets/img/nutriscore/nutriscore-{{substitute.nutriscore}}.png" alt="nutriscore">
-                            </div>
-                            <img src="{{ substitute.image }}" class="card-img-top img_product" alt="image du produit">
+                            {% else %}
                             <div class="btn">
-                                
                                 <a href="{% url 'login' %}?next=/substitute?query={{ product.bar_code }}" class="btn btn-primary align-items-center">Se connecter</a>
-                                
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                     {% endfor %}
-                    {% endif %}
                 </div>
             </div>
         </div>

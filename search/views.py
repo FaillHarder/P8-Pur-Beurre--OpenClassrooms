@@ -1,6 +1,4 @@
-from django.core import paginator
 from search.models import Product
-from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
 
 # Create your views here.
