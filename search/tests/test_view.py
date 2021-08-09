@@ -33,29 +33,32 @@ class TestView(TestCase):
         request = self.factory.get("")
         view = index(request)
         self.assertEqual(view.status_code, 200)
-
-    def test_mentions(self):
-        request = self.factory.get("/mentions")
-        view = mentions(request)
-        self.assertEqual(view.status_code, 200)
         
-
     def test_search_product(self):
         request = self.factory.get("/search_product")
         request.GET = {"query": ""}
         view = search_product(request)
         self.assertEqual(view.status_code, 302)
-        
+        request.POST = {"query": "nutella"}
+        view = search_product(request)
+        self.assertEqual(view.status_code, 302)
+
         request.GET = {"query": "nutella"}
         view = search_product(request)
         self.assertEqual(view.status_code, 200)
+        self.assertEqual(str(self.product), "nutella")
+        self.assertEqual(str(self.category), "Snacks sucrés")
         
         request.GET = {"query": "pain"}
         view = search_product(request)
         self.assertEqual(view.status_code, 200)
 
-
     def test_substitute(self):
         request = self.factory.get("/substitute", {"query": "3017620425035"})
         view = substitute(request)
+        self.assertEqual(view.status_code, 200)
+
+    def test_mentions(self):
+        request = self.factory.get("/mentions")
+        view = mentions(request)
         self.assertEqual(view.status_code, 200)

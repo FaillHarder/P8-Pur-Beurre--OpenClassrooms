@@ -4,14 +4,13 @@ from django.db.models import Count
 
 # Create your models here.
 class Category(models.Model):
-
     name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.name
 
-class Product(models.Model):
 
+class Product(models.Model):
     product_name = models.CharField(max_length=200)
     bar_code = models.CharField(max_length=20, primary_key=True)
     nutriscore = models.CharField(max_length=2)
@@ -26,10 +25,9 @@ class Product(models.Model):
     image = models.TextField()
     url = models.TextField()
     categories = models.ManyToManyField(Category)
-    
+
     def __str__(self):
         return self.product_name
-
 
     def search(self, query):
         """Method taking user input as parameter.

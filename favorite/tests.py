@@ -1,8 +1,10 @@
 from search.models import Product, Category
+from favorite.models import Favorite
 from favorite.views import product_save, myfood, description
 
-from django.contrib.auth.models import AnonymousUser, User
+from django.contrib.auth.models import User
 from django.test import RequestFactory, TestCase
+
 
 # Create your tests here.
 class ViewTest(TestCase):
@@ -33,6 +35,7 @@ class ViewTest(TestCase):
             url="https://fr.openfoodfacts.org/produit/3017620425035/nutella-ferrero"
         )
         self.product.categories.add(self.category)
+        self.favorite = Favorite(user=self.user, product_favorite=self.product)
 
         return super().setUp()
 
@@ -44,6 +47,7 @@ class ViewTest(TestCase):
         request.user = self.user
         view = product_save(request)
         self.assertEqual(view.status_code, 200)
+        self.assertEqual(str(self.favorite), "nutella")
 
     def test_myfood(self):
         request = self.factory.get("myfood")

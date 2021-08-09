@@ -3,16 +3,14 @@ from django.shortcuts import redirect, render
 
 # Create your views here.
 def index(request):
-
     return render(request, "index.html")
 
-def mentions(request):
 
+def mentions(request):
     return render(request, "mentions.html")
 
 
 def search_product(request):
-    
     if request.method == "GET":
         query = request.GET.get("query")
         if query != "":
@@ -28,7 +26,6 @@ def search_product(request):
 
 
 def substitute(request):
-
     if request.method == "GET":
         bar_code = request.GET.get("query")
         product = Product.objects.get(bar_code=bar_code)
@@ -38,4 +35,3 @@ def substitute(request):
             "substitutes": substitutes
         }
         return render(request, "substitute.html", context)
-

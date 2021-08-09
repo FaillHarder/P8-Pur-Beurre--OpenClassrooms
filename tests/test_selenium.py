@@ -10,7 +10,7 @@ class TestPurbeurre(unittest.TestCase):
         self.driver = webdriver.Chrome()
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()
-        self.driver.get("http://127.0.0.1:8000/")
+        self.driver.get("https://pur-beurre-fdlc.herokuapp.com/")
         self.user = "fake_user"
         self.first_name = "fake_first_name"
         self.last_name = "fake_last_name"
@@ -20,7 +20,6 @@ class TestPurbeurre(unittest.TestCase):
 
     def tearDown(self):
         self.driver.close()
-        
 
     def click_on_button(self, name):
         button = self.driver.find_element_by_name(name)
@@ -39,7 +38,6 @@ class TestPurbeurre(unittest.TestCase):
         element.clear()
         element.send_keys(user_text)
 
-
     def test_result_page_show(self):
         self.driver
         self.assertEqual(
@@ -51,12 +49,12 @@ class TestPurbeurre(unittest.TestCase):
         self.click_on_link("login")
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/accounts/login/"
+            "https://pur-beurre-fdlc.herokuapp.com/accounts/login/"
         )
         self.click_on_link_text("Pas encore inscrit?")
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/registrer"
+            "https://pur-beurre-fdlc.herokuapp.com/registrer"
         )
         self.write_user_text("username", self.user)
         self.write_user_text("first_name", self.first_name)
@@ -76,12 +74,12 @@ class TestPurbeurre(unittest.TestCase):
         self.click_on_button("validate")
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/"
+            "https://pur-beurre-fdlc.herokuapp.com/"
         )
         self.click_on_link("logout")
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/accounts/logout/"
+            "https://pur-beurre-fdlc.herokuapp.com/accounts/logout/"
         )
 
 
@@ -92,7 +90,7 @@ class TestPurbeurre(unittest.TestCase):
         element.send_keys(Keys.RETURN)
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/search_product?query=nutella"
+            "https://pur-beurre-fdlc.herokuapp.com/search_product?query=nutella"
         )
 
     def test_search_nutella(self):
@@ -102,7 +100,7 @@ class TestPurbeurre(unittest.TestCase):
         element.send_keys(Keys.RETURN)
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/search_product?query=nutella"
+            "https://pur-beurre-fdlc.herokuapp.com/search_product?query=nutella"
         )
 
     def test_search_pizza_key_enter(self):
@@ -111,73 +109,65 @@ class TestPurbeurre(unittest.TestCase):
         element.send_keys("pizza" + Keys.ENTER)
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/search_product?query=pizza"
+            "https://pur-beurre-fdlc.herokuapp.com/search_product?query=pizza"
         )
 
-
     def test_select_product_and_save(self):
-        self.driver.get("http://127.0.0.1:8000/substitute?query=3017620402678")
+        self.driver.get("https://pur-beurre-fdlc.herokuapp.com/substitute?query=3017620402678")
         self.click_on_link_text("Se connecter")
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/accounts/login/?next=/substitute?query=3017620402678"
+            "https://pur-beurre-fdlc.herokuapp.com/accounts/login/?next=/substitute?query=3017620402678"
         )
         self.write_user_text("username", self.user)
         self.write_user_text("password", self.password1)
         self.click_on_button("validate")
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/substitute?query=3017620402678"
+            "https://pur-beurre-fdlc.herokuapp.com/substitute?query=3017620402678"
         )
         self.click_on_link_text("Sauvegarder")
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/product_save?substitute=3175681854482"
+            "https://pur-beurre-fdlc.herokuapp.com/product_save?substitute=3292070005161"
         )
 
     def test_myprofile(self):
         self.click_on_link("login")
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/accounts/login/"
+            "https://pur-beurre-fdlc.herokuapp.com/accounts/login/"
         )
         self.write_user_text("username", self.user)
         self.write_user_text("password", self.password1)
         self.click_on_button("validate")
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/"
+            "https://pur-beurre-fdlc.herokuapp.com/"
         )
         self.click_on_link("myprofile")
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/myprofile"
+            "https://pur-beurre-fdlc.herokuapp.com/myprofile"
         )
 
     def test_myfood(self):
         self.click_on_link("login")
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/accounts/login/"
+            "https://pur-beurre-fdlc.herokuapp.com/accounts/login/"
         )
         self.write_user_text("username", self.user)
         self.write_user_text("password", self.password1)
         self.click_on_button("validate")
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/"
+            "https://pur-beurre-fdlc.herokuapp.com/"
         )
         self.click_on_link("myfood")
         self.assertEqual(
             self.driver.current_url,
-            "http://127.0.0.1:8000/myfood"
-        )
-
-    def test_legal_mentions(self):
-        self.click_on_link("mentions")
-        self.assertEqual(
-            self.driver.current_url,
-            "http://127.0.0.1:8000/mentions"
+            "https://pur-beurre-fdlc.herokuapp.com/myfood"
         )
 
 if __name__ == '__main__':
