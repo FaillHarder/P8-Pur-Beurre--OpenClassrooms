@@ -8,7 +8,7 @@ import requests
 
 class Command(BaseCommand):
     help = 'Ajout des catégories et produits dans la bdd'
-    
+
     def handle(self, *args, **options):
 
         params = self.read_json_file("search/management/settings.json")
@@ -40,17 +40,16 @@ class Command(BaseCommand):
                     continue
 
                 try:
-                    data_product = Product(data["product_name"], *list(data.values())[1:])
-                    data_product.save()
-                    cate = Category.objects.get(name=category)
-                    Product.objects.get(bar_code=data["bar_code"]).categories.add(cate)
+                    self.create_product(data, category)
+                    # data_product = Product(data["product_name"], *list(data.values())[1:])
+                    # data_product.save()
+                    # cate = Category.objects.get(name=category)
+                    # Product.objects.get(bar_code=data["bar_code"]).categories.add(cate)
                 except IntegrityError:
                     continue
                 # ajoute la relation manytomany entre produit et category
-                
 
         self.write_json_file_next_page("search/management/settings.json", params)
-
 
     def read_json_file(self, json_file):
         with open(json_file, "r", encoding="utf-8") as file:
@@ -58,7 +57,7 @@ class Command(BaseCommand):
         return data
 
     def write_json_file_next_page(self, json_file, json_file_r):
-        json_file_r["page"] +=1
+        json_file_r["page"] += 1
         with open(json_file, "w", encoding="utf-8") as outfile:
             json.dump(json_file_r, outfile, indent=4, ensure_ascii=False)
 
@@ -77,5 +76,12 @@ class Command(BaseCommand):
                 "page": page
             }
         )
-        response_json = response.json()
+        if response.status_code == 200:
+            response_json = response.json()
         return response_json
+
+    def create_product(self, data, category):
+        data_product = Product(data["product_name"], *list(data.values())[1:])
+        data_product.save()
+        cate = Category.objects.get(name=category)
+        Product.objects.get(bar_code=data["bar_code"]).categories.add(cate)

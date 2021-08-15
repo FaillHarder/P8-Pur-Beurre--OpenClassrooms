@@ -1,4 +1,3 @@
-from django.db.models.fields import EmailField
 from search.models import Product
 from django.db import models
 from django.contrib.auth.models import User

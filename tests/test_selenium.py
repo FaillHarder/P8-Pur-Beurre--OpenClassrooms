@@ -64,7 +64,7 @@ class TestPurbeurre(unittest.TestCase):
         self.write_user_text("password2", self.password2)
         self.click_on_button("submit_form")
         time.sleep(2)
-        #errorlist = user already exists
+        # errorlist = user already exists
         self.assertTrue(self.driver.find_element_by_class_name("errorlist"))
 
     def test_login_logout(self):
@@ -81,7 +81,6 @@ class TestPurbeurre(unittest.TestCase):
             self.driver.current_url,
             "https://pur-beurre-fdlc.herokuapp.com/accounts/logout/"
         )
-
 
     def test_search_top_nutella(self):
         element = self.driver.find_element_by_id("query_top")
@@ -169,6 +168,7 @@ class TestPurbeurre(unittest.TestCase):
             self.driver.current_url,
             "https://pur-beurre-fdlc.herokuapp.com/myfood"
         )
+
 
 if __name__ == '__main__':
     unittest.main()

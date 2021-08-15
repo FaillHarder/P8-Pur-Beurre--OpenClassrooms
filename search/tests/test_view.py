@@ -1,11 +1,9 @@
 from search.views import index, search_product, substitute, mentions
-
-from django.test.client import RequestFactory
 from search.models import Product, Category
 
 from django.test import RequestFactory, TestCase
 
-# Create your tests here.
+
 class TestView(TestCase):
 
     def setUp(self):
@@ -33,7 +31,7 @@ class TestView(TestCase):
         request = self.factory.get("")
         view = index(request)
         self.assertEqual(view.status_code, 200)
-        
+
     def test_search_product(self):
         request = self.factory.get("/search_product")
         request.GET = {"query": ""}
@@ -48,7 +46,7 @@ class TestView(TestCase):
         self.assertEqual(view.status_code, 200)
         self.assertEqual(str(self.product), "nutella")
         self.assertEqual(str(self.category), "Snacks sucrés")
-        
+
         request.GET = {"query": "pain"}
         view = search_product(request)
         self.assertEqual(view.status_code, 200)

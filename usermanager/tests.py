@@ -1,7 +1,7 @@
 from django.contrib.sessions.middleware import SessionMiddleware
 from usermanager.forms import SignUpForm
 from usermanager.views import registrer, myprofile
-from django.contrib.auth import authenticate, login
+# from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.test import RequestFactory, TestCase
 
@@ -13,7 +13,7 @@ class TestView(TestCase):
         self.factory = RequestFactory()
         self.username = "username"
         self.password = "secret"
-        
+
         self.user = User.objects.create_user(username="username", password="secret")
         return super().setUp()
 
@@ -40,7 +40,7 @@ class TestView(TestCase):
         view = registrer(request)
         # redirect index
         self.assertEqual(view.status_code, 302)
-        
+
         user = User.objects.all()
         self.assertEqual(len(user), 2)
 

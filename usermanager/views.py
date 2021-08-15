@@ -3,9 +3,9 @@ from usermanager.forms import SignUpForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, render
 
-# Create your views here.
+
 def registrer(request):
-    
+
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
