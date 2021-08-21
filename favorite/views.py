@@ -5,6 +5,8 @@ from django.shortcuts import render
 
 
 def product_save(request):
+    """Register a substitute product selected by the user
+       in Favorite table"""
     user = request.user
     substitue = request.GET.get("substitute")
     substitue_save = Product.objects.get(bar_code=substitue)
@@ -13,6 +15,7 @@ def product_save(request):
 
 
 def myfood(request):
+    """Retrieves substitutions products saved by the user"""
     my_fav = Favorite.objects.filter(user=request.user)
     my_fav_products = [fav.product_favorite for fav in my_fav]
     paginator = Paginator(my_fav_products, 6)

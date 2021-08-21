@@ -121,3 +121,4 @@ class TestCommand(unittest.TestCase):
         cmd.create_product(self, data, category)
         product = Product.objects.get(product_name="TestNutella")
         self.assertEqual(product.product_name, "TestNutella")
+        self.assertEqual(category.name, "Snacks")

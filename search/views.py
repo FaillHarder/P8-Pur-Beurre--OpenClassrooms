@@ -11,6 +11,8 @@ def mentions(request):
 
 
 def search_product(request):
+    """Get user input to search product in db.
+       return a queryset"""
     if request.method == "GET":
         query = request.GET.get("query")
         if query != "":
@@ -26,6 +28,8 @@ def search_product(request):
 
 
 def substitute(request):
+    """Get product seleted by user,use their barcode for
+       search a substitute. Return a queryset"""
     if request.method == "GET":
         bar_code = request.GET.get("query")
         product = Product.objects.get(bar_code=bar_code)
