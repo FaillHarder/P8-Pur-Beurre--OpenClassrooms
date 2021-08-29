@@ -1,9 +1,12 @@
-from django.core.paginator import Paginator
 from favorite.models import Favorite
 from search.models import Product
+
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.shortcuts import render
 
 
+@login_required
 def product_save(request):
     """Register a substitute product selected by the user
        in Favorite table"""
@@ -14,6 +17,7 @@ def product_save(request):
     return render(request, "product_save.html")
 
 
+@login_required
 def myfood(request):
     """Retrieves substitutions products saved by the user"""
     my_fav = Favorite.objects.filter(user=request.user)
