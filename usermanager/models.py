@@ -11,5 +11,5 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ('',)
 
-    def get_index(self):
-        return reverse('search:index')
+    def get_absolute_url(self):
+        return reverse('index')
