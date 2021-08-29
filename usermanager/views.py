@@ -1,25 +1,34 @@
 from usermanager.forms import SignUpForm
-
-from django.contrib.auth import authenticate, login
-from django.shortcuts import redirect, render
-
-
-def registrer(request):
-
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect("index")
-    else:
-        form = SignUpForm()
-    return render(request, 'registrer.html', {'form': form})
+from usermanager.models import User
+from django.views.generic import CreateView, TemplateView
+from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import reverse_lazy
 
 
-def myprofile(request):
+class Signup(CreateView):
+    model = User
+    template_name = 'signup.html'
+    form_class = SignUpForm
 
-    return render(request, 'myprofile.html')
+
+class Login(LoginView):
+    template_name = 'login.html'
+
+
+class Logout(LogoutView):
+    next_page = reverse_lazy('index')
+
+
+class Profile(TemplateView):
+    template_name = 'profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['username'] = Profile.extract_username_from_mail(
+            str(self.request.user)
+        )
+        return context
+
+    @staticmethod
+    def extract_username_from_mail(mail: str):
+        return mail[:mail.find('@')]

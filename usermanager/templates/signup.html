@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container px-4 px-lg-5 h-100">
+            <div class="row gx-4 gx-lg-5 align-items-center justify-content-center text-center">
+                <div class="col-lg-8 align-self-start">
+                    <h2 class="text-primary">Créer un compte</h2>
+                </div>
+            </div>
+
+            <form class="text-white-75 justify-content-center" method="POST" action="{% url 'signup' %}">
+                {% csrf_token %} <!-- Afficher le csrf_token ce qui permet de le générer et automatiquement inclus dans le formulaire -->
+
+                {{ form.as_p }}
+                <input class="btn btn-primary btn-xl" type='submit' value="Créer le compte"></input>
+            </form>
+        </div>
+    </header>
+{% endblock header %}
