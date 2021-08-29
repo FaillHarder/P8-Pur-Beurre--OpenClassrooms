@@ -12,4 +12,4 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ('',)
 
     def get_absolute_url(self):
-        return reverse('index')
+        return reverse('login')

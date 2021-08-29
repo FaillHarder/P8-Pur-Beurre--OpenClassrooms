@@ -2,7 +2,7 @@ from search.models import Product, Category
 from favorite.models import Favorite
 from favorite.views import product_save, myfood, description
 
-from django.contrib.auth.models import User
+from usermanager.models import User
 from django.test import RequestFactory, TestCase
 
 
