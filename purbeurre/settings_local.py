@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'purbeurre.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'purbeurre',
+        'NAME': 'pur-beurre',
         'USER': 'purbeurredev',
         'PASSWORD': 'purbeurretest',
         'HOST': 'localhost',
@@ -135,6 +135,8 @@ STATICFILES_DIRS = [
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+AUTH_USER_MODEL = 'usermanager.User'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

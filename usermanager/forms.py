@@ -1,22 +1,12 @@
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth import forms as auth_forms
+from django.contrib.auth import get_user_model
 
 
-class SignUpForm(UserCreationForm):
-    first_name = forms.CharField(max_length=50, label='Prénom')
-    last_name = forms.CharField(max_length=50, label='Nom')
-    email = forms.EmailField(
-        max_length=254,
-        label='Email',
-        help_text='Entrez une adresse mail valide'
-    )
-    username = forms.CharField(
-        max_length=50,
-        label='Nom d\'utilisateur',
-        help_text='50 caractères maximum. Lettres, chiffres est @/./+/-/_ seulement',
-    )
+class SignUpForm(auth_forms.UserCreationForm):
 
-    class Meta:
-        model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    class Meta(auth_forms.UserCreationForm.Meta):
+        model = get_user_model()
+        fields = ('email',)

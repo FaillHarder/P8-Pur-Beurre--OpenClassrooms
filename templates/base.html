@@ -29,14 +29,14 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <div class="container">
-                        <form class="d-flex justify-content-end" method="GET" action="search_product">
+                        <form class="d-flex justify-content-end" method="GET" action="{% url 'search_product' %}">
                             <input type="text" name="query" class="form-control-sm" placeholder="Rechercher..." aria-label="Recherche" id="query_top">
                         </form>
                     </div>
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
                         {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'myprofile' %}">
+                            <a class="nav-link" href="{% url 'profile' %}">
                                 <img class="img_w50" src="{% static 'assets/img/avatar.png' %}" alt="img profile" name="myprofile">
                             </a>
                         </li>
